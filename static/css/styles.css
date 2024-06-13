@@ -1,0 +1,4 @@
+body {
+    padding-top: 56px;  /* Adjust based on navbar height */
+    padding-bottom: 56px;  /* Adjust based on footer height */
+}
