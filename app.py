@@ -15,14 +15,7 @@ def index():
 @socketio.on('scrape')
 def handle_scrape(data):
     url = data['url']
-    def progress_callback(progress):
-        emit('progress', {'progress': progress}, broadcast=True)
-    # script = generate_script(url)
-    script = generate_script(url, progress_callback)
-    # Simulating progress for demonstration purposes
-    # for progress in range(0, 101, 10):
-    #     socketio.sleep(0.5)  # Simulate a delay for each step
-    #     emit('progress', {'progress': progress})
+    script = generate_script(url)
 
     file_name = 'reddit_script.txt'
     file_path = os.path.join(DOWNLOAD_FOLDER, file_name)
@@ -36,4 +29,4 @@ def download_file(filename):
     return send_from_directory(DOWNLOAD_FOLDER, filename, as_attachment=True)
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app,debug=True)

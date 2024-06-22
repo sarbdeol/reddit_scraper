@@ -12,10 +12,10 @@ from selenium.webdriver.chrome.options import Options
 # article_list = pd.read_csv('reddit_url.csv')
 
 # Define a function to fetch and format the content
-def fetch_reddit_content(article_url,progress_callback):
+def fetch_reddit_content(article_url):
   
     chrome_options = Options()
-    chrome_options.add_argument("--headless")
+    # chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("window-size=1920x1080")
@@ -28,7 +28,7 @@ def fetch_reddit_content(article_url,progress_callback):
     driver = webdriver.Chrome(options=chrome_options)
     driver.get(article_url)
     time.sleep(2)  # Adjust sleep time as necessary for page load
-    progress_callback(4)
+    # progress_callback(4)
     # Scroll to load all comments
     last_height = driver.execute_script("return document.body.scrollHeight")
     while True:
@@ -47,7 +47,6 @@ def fetch_reddit_content(article_url,progress_callback):
         last_height = new_height
     
     soup = BS(driver.page_source, 'html.parser')
-    progress_callback(16)
     # Extract the original post description
     post_title = soup.find('h1').get_text()
     driver.save_screenshot('redot.png')
@@ -78,10 +77,10 @@ def fetch_reddit_content(article_url,progress_callback):
     return post_title, post_desc, comments_output
 script=[]
 # Generate the script
-def generate_script(article_url, progress_callback):
+def generate_script(article_url):
     
     
-    post_title,post_desc, comments = fetch_reddit_content(article_url,progress_callback)
+    post_title,post_desc, comments = fetch_reddit_content(article_url)
     total_steps = len(comments)
     script.append("Narrator Opening: Welcome back to our channel! Today we are diving into Reddit thread!\n")
     script.append(f"Title Card: {post_title.strip()}\n")
@@ -91,8 +90,8 @@ def generate_script(article_url, progress_callback):
     for i, comment in enumerate(comments):
         script.append(f"Comment by {comment['Comment Author']}: {comment['Comment Text']}\n")
         # script.append("Narrator Comment: This user raises an interesting point...\n")
-        progress = ((i + 1) / total_steps * 80) + 20  # Adjusting progress calculation
-        progress_callback(progress)
+        # progress = ((i + 1) / total_steps * 80) + 20  # Adjusting progress calculation
+        # progress_callback(progress)
     script.append("Narrator Closing: That’s all for today's post. Thank you for listening!\n")
 
     return "\n".join(script)
