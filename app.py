@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, send_file,send_from_directory
 from flask_socketio import SocketIO, emit
 import os
-from ai_crawol import generate_script
+from ai_api import generate_script
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'

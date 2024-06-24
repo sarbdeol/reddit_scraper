@@ -4,7 +4,7 @@ from selenium import webdriver
 from bs4 import BeautifulSoup as BS
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
-
+import undetected_chromedriver as uc
 # Initialize Selenium WebDriver (make sure to set up the correct path to your WebDriver)
 
 
@@ -14,18 +14,15 @@ from selenium.webdriver.chrome.options import Options
 # Define a function to fetch and format the content
 def fetch_reddit_content(article_url):
   
-    chrome_options = Options()
-    # chrome_options.add_argument("--headless")
+    chrome_options = uc.ChromeOptions()
+    chrome_options.headless=False # Uncomment if you want to run headless
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("window-size=1920x1080")
-    chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
+    chrome_options.add_argument("--disable-blink-features=AutomationControlled")
     
-    # Remove the navigator.webdriver flag
-    chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])
-    chrome_options.add_experimental_option('useAutomationExtension', False)
 
-    driver = webdriver.Chrome(options=chrome_options)
+    driver = uc.Chrome(options=chrome_options)
+    driver.maximize_window()
     driver.get(article_url)
     time.sleep(2)  # Adjust sleep time as necessary for page load
     # progress_callback(4)
@@ -101,3 +98,5 @@ def generate_script(article_url):
 
 # Clean up Selenium WebDriver
 
+
+# fetch_reddit_content('https://www.reddit.com/r/relationship_advice/comments/1d0leag/my_30m_future_mil_57f_keeps_inviting_people_to/')
