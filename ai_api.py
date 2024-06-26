@@ -1,9 +1,12 @@
 import praw
 from gpt import *
 # Initialize PRAW with your credentials
-reddit = praw.Reddit(client_id='nyhrOjCaHtroAd2rEJm8LA',
-                     client_secret='lw7NvmPDjGKCbymHrXOvElnhJDK5SA',
-                     user_agent='Leading_Internal_337')
+client_id='nyhrOjCaHtroAd2rEJm8LA',
+client_secret='lw7NvmPDjGKCbymHrXOvElnhJDK5SA',
+user_agent='Leading_Internal_337'
+reddit = praw.Reddit(client_id=client_id,
+                     client_secret=client_secret,
+                     user_agent=user_agent)
 
 def fetch_reddit_content(article_url):
     submission_id = article_url.split("comments/")[-1].split("/")[0]

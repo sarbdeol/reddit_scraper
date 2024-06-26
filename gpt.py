@@ -2,7 +2,7 @@
 import requests ,json
 def openai_title(titles):
     # Set up your OpenAI API key
-    api_key = 'sk-proj-x0Jhg1qaVTCRu5FXz0O5T3BlbkFJhQk8no3fcGZzMk5n8IBI'
+    api_key = ''
 
     # Endpoint for OpenAI's GPT-4 API
     url = "https://api.openai.com/v1/chat/completions"
@@ -43,7 +43,7 @@ def openai_title(titles):
 
 def openai_close(titles):
     # Set up your OpenAI API key
-    api_key = 'sk-proj-x0Jhg1qaVTCRu5FXz0O5T3BlbkFJhQk8no3fcGZzMk5n8IBI'
+    api_key = ''
 
     # Endpoint for OpenAI's GPT-4 API
     url = "https://api.openai.com/v1/chat/completions"
