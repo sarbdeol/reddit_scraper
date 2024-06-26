@@ -1,9 +1,9 @@
 import praw
 from gpt import *
 # Initialize PRAW with your credentials
-client_id='nyhrOjCaHtroAd2rEJm8LA',
-client_secret='lw7NvmPDjGKCbymHrXOvElnhJDK5SA',
-user_agent='Leading_Internal_337'
+client_id='',
+client_secret='',
+user_agent=''
 reddit = praw.Reddit(client_id=client_id,
                      client_secret=client_secret,
                      user_agent=user_agent)
