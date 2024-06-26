@@ -1,5 +1,5 @@
 import praw
-
+from gpt import *
 # Initialize PRAW with your credentials
 reddit = praw.Reddit(client_id='nyhrOjCaHtroAd2rEJm8LA',
                      client_secret='lw7NvmPDjGKCbymHrXOvElnhJDK5SA',
@@ -59,7 +59,8 @@ def generate_script(article_url):
     
     script = []
     script.append("Narrator Opening: Welcome back to our channel! Today we are diving into a Reddit thread!\n")
-    script.append(f"Narrator Intro: {post_title.strip()}\n{post_desc.strip()}")
+    narrator_intro=openai_title(f"{post_title.strip()}\n{post_desc.strip()}")
+    script.append(f"Narrator Intro: {narrator_intro}")
     # script.append(f"Reading Original Post: {post_desc.strip()}\n\n")
     script.append("Scene Transition: Comments Pop Up\n\n")
     
@@ -68,8 +69,8 @@ def generate_script(article_url):
         
         for sub_comment in comment['Replies']:
             script.append(f">> {sub_comment['Comment Author']}: {sub_comment['Comment Text']}\n")
-    
-    script.append("Narrator Closing: That’s all for today's post. Thank you for listening!\n")
+    narrator_close=openai_close(f"{post_title.strip()}\n{post_desc.strip()}")
+    script.append(f"Narrator Closing: {narrator_close}\n")
     
     return "\n".join(script)
 
